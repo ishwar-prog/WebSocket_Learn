@@ -53,5 +53,18 @@
         appendLog('[RECEIVED]', e.data)
     })
 
+    document.getElementById('message-form').addEventListener('submit',(e)=>{
+        e.preventDefault();
+
+        if(socket.readyState !==  WebSocket.OPEN){
+            appendLog('[ERROR]', 'No active tunnel found.');
+        }
+
+        const msg = input.value.trim();
+        socket.send(msg);
+        appendLog('[SENT]', msg);
+        input.value = '';
+    })
+
 </script>
 </html>
